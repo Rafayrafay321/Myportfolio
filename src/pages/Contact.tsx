@@ -1,11 +1,12 @@
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Mail, Phone, Github, Linkedin, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import SectionTitle from '@/components/SectionTitle';
+import emailjs from '@emailjs/browser';
 
 interface FormData {
   name: string;
@@ -23,6 +24,7 @@ const Contact = () => {
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -34,15 +36,49 @@ const Contact = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Basic form validation
+    if (!formData.name.trim()) {
+      toast({ title: "Error", description: "Please enter your name" });
+      return;
+    }
+    
+    if (!formData.email.trim()) {
+      toast({ title: "Error", description: "Please enter your email" });
+      return;
+    }
+    
+    if (!formData.subject.trim()) {
+      toast({ title: "Error", description: "Please enter a subject" });
+      return;
+    }
+    
+    if (!formData.message.trim()) {
+      toast({ title: "Error", description: "Please enter a message" });
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulating form submission
-    setTimeout(() => {
+    // Initialize EmailJS with your public key
+    emailjs.init("7LI8jGe_QNjOey2WQ");
+    
+    // Send email using EmailJS
+    emailjs.sendForm(
+      'service_xgf6t6f',  // Your Service ID
+      'template_ycjb7g6', // Your Template ID
+      formRef.current!,
+      '7LI8jGe_QNjOey2WQ' // Your Public Key
+    )
+    .then((result) => {
+      console.log('Email successfully sent!', result.text);
+      
       toast({
         title: "Message Sent!",
         description: "Thanks for reaching out. I'll get back to you soon.",
       });
       
+      // Reset form data
       setFormData({
         name: '',
         email: '',
@@ -51,7 +87,18 @@ const Contact = () => {
       });
       
       setIsSubmitting(false);
-    }, 1500);
+    })
+    .catch((error) => {
+      console.error('Failed to send email:', error);
+      
+      toast({
+        title: "Error",
+        description: "Failed to send your message. Please try again later.",
+        variant: "destructive",
+      });
+      
+      setIsSubmitting(false);
+    });
   };
   
   return (
@@ -112,7 +159,7 @@ const Contact = () => {
                 subtitle="I'll get back to you as soon as possible"
               />
               
-              <form onSubmit={handleSubmit} className="glass-card p-6 rounded-lg">
+              <form ref={formRef} onSubmit={handleSubmit} className="glass-card p-6 rounded-lg">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label htmlFor="name" className="block mb-2 text-sm font-medium">
