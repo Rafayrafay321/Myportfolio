@@ -1,5 +1,5 @@
 
-import { Database, Flask, Code } from 'lucide-react';
+import { Database, Beaker, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SectionTitle from '@/components/SectionTitle';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,7 @@ const services = [
     tools: "Python, Pandas, NumPy, Matplotlib, Seaborn"
   },
   {
-    icon: <Flask className="h-12 w-12 text-tech-blue" />,
+    icon: <Beaker className="h-12 w-12 text-tech-blue" />,
     title: "Machine Learning Model Training",
     description: "Develop and train machine learning models to solve complex problems and make predictions.",
     details: [

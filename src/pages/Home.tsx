@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Database, Flask } from 'lucide-react';
+import { ArrowRight, Code, Database, Beaker } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SectionTitle from '@/components/SectionTitle';
 import SkillBadge from '@/components/SkillBadge';
@@ -90,7 +90,7 @@ const Home = () => {
                 description: "Build robust backends with Flask and FastAPI to power your web applications."
               },
               {
-                icon: <Flask className="h-10 w-10 mb-4 text-tech-blue" />,
+                icon: <Beaker className="h-10 w-10 mb-4 text-tech-blue" />,
                 title: "Machine Learning",
                 description: "Develop ML models to solve complex problems and make data-driven predictions."
               }
