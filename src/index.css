@@ -59,3 +59,33 @@
 .text-gradient {
   @apply bg-gradient-to-r from-tech-blue to-tech-cyan bg-clip-text text-transparent;
 }
+
+/* Modern UI additions */
+.hover-scale {
+  @apply transition-all duration-300 hover:scale-105;
+}
+
+.input-modern {
+  @apply bg-secondary/30 border-gray-700 focus:border-tech-blue/70 transition-all duration-300;
+}
+
+.card-modern {
+  @apply shadow-lg border border-white/5 hover:border-white/10 transition-all duration-300;
+}
+
+.btn-modern {
+  @apply transition-all duration-300 hover:shadow-md hover:shadow-primary/20;
+}
+
+.animate-fade-in {
+  @apply animate-[fade-in_0.5s_ease-out];
+}
+
+.animate-slide-up {
+  @apply animate-[slide-up_0.5s_ease-out];
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

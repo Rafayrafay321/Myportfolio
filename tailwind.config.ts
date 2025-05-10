@@ -59,6 +59,17 @@ export default {
           lightBlue: '#60A5FA',
           indigo: '#6366F1',
           cyan: '#0EA5E9',
+        },
+        // Modern gray palette
+        gray: {
+          light: '#F1F1F1',     // Light gray
+          soft: '#E5E7EB',      // Soft gray
+          medium: '#9CA3AF',    // Medium gray
+          neutral: '#6B7280',   // Neutral gray
+          slate: '#475569',     // Slate gray
+          charcoal: '#374151',  // Charcoal gray
+          dark: '#1F2937',      // Dark gray
+          royal: '#1E293B',     // Royal gray
         }
 			},
 			borderRadius: {

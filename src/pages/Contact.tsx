@@ -1,6 +1,6 @@
 
 import { useState, useRef } from 'react';
-import { Mail, Phone, Github, Linkedin, MapPin } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, MapPin, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -104,17 +104,22 @@ const Contact = () => {
   return (
     <>
       {/* Contact Hero */}
-      <section className="py-16 px-4 bg-gradient">
-        <div className="container mx-auto text-center text-white">
-          <h1 className="text-4xl font-bold mb-4">Get In Touch</h1>
-          <p className="text-white/80 max-w-2xl mx-auto">
+      <section className="py-20 px-4 bg-gradient relative overflow-hidden">
+        <div className="absolute inset-0 bg-gray-royal/30 backdrop-blur-sm"></div>
+        <div className="container mx-auto text-center text-white relative z-10 animate-fade-in">
+          <h1 className="text-5xl font-bold mb-6">Get In Touch</h1>
+          <p className="text-gray-light/90 max-w-2xl mx-auto text-lg">
             Have a question or want to work together? Feel free to reach out to me directly.
           </p>
         </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute -bottom-16 -left-16 w-64 h-64 bg-tech-blue/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-8 -right-8 w-48 h-48 bg-tech-cyan/10 rounded-full blur-2xl"></div>
       </section>
       
       {/* Contact Information */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-gray-royal/20">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             {[
@@ -140,11 +145,13 @@ const Contact = () => {
               <a 
                 key={index} 
                 href={item.link}
-                className="glass-card p-6 rounded-lg text-center hover:border-tech-blue/50 transition-all"
+                className="glass-card card-modern p-6 rounded-lg text-center hover-scale"
               >
                 <div className="flex flex-col items-center">
-                  {item.icon}
-                  <h3 className="text-xl font-medium mt-4 mb-2">{item.title}</h3>
+                  <div className="p-3 bg-gray-dark/50 rounded-full mb-4">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-medium mt-2 mb-2">{item.title}</h3>
                   <p className="text-muted-foreground">{item.value}</p>
                 </div>
               </a>
@@ -159,10 +166,10 @@ const Contact = () => {
                 subtitle="I'll get back to you as soon as possible"
               />
               
-              <form ref={formRef} onSubmit={handleSubmit} className="glass-card p-6 rounded-lg">
+              <form ref={formRef} onSubmit={handleSubmit} className="glass-card card-modern p-8 rounded-lg">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label htmlFor="name" className="block mb-2 text-sm font-medium">
+                    <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-soft">
                       Your Name
                     </label>
                     <Input
@@ -172,11 +179,11 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
-                      className="bg-secondary/50"
+                      className="bg-gray-dark/50 border-gray-charcoal/50 focus:border-tech-blue/50 h-12"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium">
+                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-soft">
                       Your Email
                     </label>
                     <Input
@@ -187,13 +194,13 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
-                      className="bg-secondary/50"
+                      className="bg-gray-dark/50 border-gray-charcoal/50 focus:border-tech-blue/50 h-12"
                     />
                   </div>
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="subject" className="block mb-2 text-sm font-medium">
+                  <label htmlFor="subject" className="block mb-2 text-sm font-medium text-gray-soft">
                     Subject
                   </label>
                   <Input
@@ -203,12 +210,12 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     placeholder="How can I help you?"
-                    className="bg-secondary/50"
+                    className="bg-gray-dark/50 border-gray-charcoal/50 focus:border-tech-blue/50 h-12"
                   />
                 </div>
                 
                 <div className="mb-6">
-                  <label htmlFor="message" className="block mb-2 text-sm font-medium">
+                  <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-soft">
                     Message
                   </label>
                   <Textarea
@@ -218,16 +225,26 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     placeholder="Type your message here..."
-                    className="bg-secondary/50 min-h-32"
+                    className="bg-gray-dark/50 border-gray-charcoal/50 focus:border-tech-blue/50 min-h-32"
                   />
                 </div>
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-tech-blue hover:bg-tech-darkBlue"
+                  className="w-full bg-tech-blue hover:bg-tech-darkBlue h-12 btn-modern flex gap-2"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin h-4 w-4 border-2 border-white/80 rounded-full border-t-transparent"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
@@ -239,8 +256,8 @@ const Contact = () => {
                 subtitle="Find me on social platforms"
               />
               
-              <div className="glass-card p-6 rounded-lg flex flex-col h-[calc(100%-4.5rem)]">
-                <p className="mb-6 text-muted-foreground">
+              <div className="glass-card card-modern p-8 rounded-lg flex flex-col h-[calc(100%-4.5rem)]">
+                <p className="mb-8 text-gray-medium">
                   Feel free to connect with me on these platforms for professional networking and to see more of my work.
                 </p>
                 
@@ -269,22 +286,22 @@ const Contact = () => {
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center py-4 px-3 rounded-md hover:bg-secondary/70 transition-colors mb-2"
+                    className="flex items-center py-4 px-3 rounded-md hover:bg-gray-dark/70 transition-colors mb-2 hover-scale group"
                   >
-                    <div className="p-2 bg-secondary rounded-md mr-4">
+                    <div className="p-2 bg-gray-royal rounded-md mr-4 group-hover:bg-tech-blue/20 transition-colors">
                       {social.icon}
                     </div>
                     <div>
-                      <div className="font-medium">{social.name}</div>
-                      <div className="text-sm text-muted-foreground">
+                      <div className="font-medium text-gray-soft">{social.name}</div>
+                      <div className="text-sm text-gray-medium">
                         {social.username}
                       </div>
                     </div>
                   </a>
                 ))}
                 
-                <div className="mt-auto pt-6 border-t border-border">
-                  <p className="text-center text-muted-foreground text-sm">
+                <div className="mt-auto pt-6 border-t border-gray-charcoal/30">
+                  <p className="text-center text-gray-medium text-sm">
                     Available for freelance projects and full-time opportunities
                   </p>
                 </div>
