@@ -20,7 +20,7 @@ const About = () => {
             <div className="md:w-2/5">
               <div className="rounded-2xl overflow-hidden border-2 border-tech-blue">
                 <img 
-                  src="/placeholder.svg" 
+                  src="https://i.postimg.cc/mr43J3zS/picofme.png" 
                   alt="Abdul Rafay" 
                   className="w-full h-auto object-cover"
                 />

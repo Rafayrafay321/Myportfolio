@@ -37,7 +37,7 @@ const Home = () => {
               <div className="relative">
                 <div className="w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-tech-blue">
                   <img 
-                    src="/placeholder.svg" 
+                    src="https://i.postimg.cc/mr43J3zS/picofme.png" 
                     alt="Abdul Rafay" 
                     className="w-full h-full object-cover"
                   />
